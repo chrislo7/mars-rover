@@ -11,7 +11,7 @@ describe('Grid Class', function() {
     assert.exists(Grid)
   })
 
-  it('should have x and y coordinates', function() {
+  it('should create a new Grid instance with x and y coordinates', function() {
     assert.equal(testGrid1.x, 1)
     assert.equal(testGrid1.y, 2)
     assert.equal(testGrid2.x, 6)
@@ -42,6 +42,11 @@ describe('placeRover', function() {
 
   it('should not push new rovers into rovers array when out of boundaries (min)', function() {
     testGrid3.placeRover(testRover3)
+    assert.notExists(testGrid3.rovers[1])
+  })
+
+  it('should not push new rovers into rovers array when there is already a rover occupying the same space', function () {
+    testGrid3.placeRover(testRover1)
     assert.notExists(testGrid3.rovers[1])
   })
 
