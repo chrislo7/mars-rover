@@ -16,27 +16,27 @@ chai.Assertion.addProperty('uppercase', function() {
   );
 })
 
-describe('takeInput', function() {
+describe('inputData', function() {
   it ('should take input from text file', function(){
-    let result = assets.takeInput('input/input-data.txt')
+    let result = assets.inputData('input/input-data.txt')
     assert.exists(result, 'input is neither `null` nor `undefined`')
   })
 
   it ('should return array for each line within txt file', function(){
-    let result = assets.takeInput('input/input-data.txt')
+    let result = assets.inputData('input/input-data.txt')
     assert.isArray(result, 'input is an array')
   })
 })
 
-describe('gridSize', function() {
+describe('grid', function() {
   it ('should return an array with two elements', function(){
-    assert.exists(assets.gridSize[0], 'first element exists')
-    assert.exists(assets.gridSize[1], 'second element exists')
-    assert.notExists(assets.gridSize[2], 'a third element does not exist')
+    assert.exists(assets.grid[0], 'first element exists')
+    assert.exists(assets.grid[1], 'second element exists')
+    assert.notExists(assets.grid[2], 'a third element does not exist')
   })
 
   it ('should return an array with two numbers', function(){
-    assets.gridSize.map(num => { assert.isFinite(num, 'element is a finite number')})
+    assets.grid.map(num => { assert.isFinite(num, 'element is a finite number')})
   })
 
 })
@@ -64,19 +64,19 @@ describe('movement', function() {
 
 describe('leftTurn', function() {
   it ('should show correct cardinal directions for left turns', function(){
-    assert.equal(assets.leftTurn('N'), 'W', 'should return W')
-    assert.equal(assets.leftTurn('S'), 'E', 'should return E')
-    assert.equal(assets.leftTurn('W'), 'S', 'should return S')
-    assert.equal(assets.leftTurn('E'), 'N', 'should return N')
+    assert.equal(assets.leftTurn('N'), 'W', 'returns W')
+    assert.equal(assets.leftTurn('S'), 'E', 'returns E')
+    assert.equal(assets.leftTurn('W'), 'S', 'returns S')
+    assert.equal(assets.leftTurn('E'), 'N', 'returns N')
   })
 })
 
 describe('rightTurn', function() {
   it ('should show correct cardinal directions for right turns', function(){
-    assert.equal(assets.rightTurn('N'), 'E', 'should return E')
-    assert.equal(assets.rightTurn('S'), 'W', 'should return W')
-    assert.equal(assets.rightTurn('W'), 'N', 'should return N')
-    assert.equal(assets.rightTurn('E'), 'S', 'should return S')
+    assert.equal(assets.rightTurn('N'), 'E', 'returns E')
+    assert.equal(assets.rightTurn('S'), 'W', 'returns W')
+    assert.equal(assets.rightTurn('W'), 'N', 'returns N')
+    assert.equal(assets.rightTurn('E'), 'S', 'returns S')
   })
 })
 
@@ -93,4 +93,3 @@ describe('navigate', function() {
     assert.isFinite(result[1], 'element is a finite number')
   })
 })
-

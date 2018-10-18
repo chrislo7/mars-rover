@@ -1,13 +1,10 @@
 const fs = require('fs')
 
-// read data from txt file, splits input to string and then to array by lines
-const takeInput = (filepath) => {
-  return fs.readFileSync(filepath).toString().split("\n")
+// read data from txt file, splits input to string and then to an array by each line
+// each line itself is also an array
+const inputData = (filepath) => {
+  return fs.readFileSync(filepath).toString().split("\n").map(elements => { return elements.split('') })
 }
-
-const gridSize = takeInput('input/input-data.txt')[0].split(' ').map(str => { return parseInt(str, 10) })
-const startingPosition = takeInput('input/input-data.txt')[1].split(' ').map(str => { return str.toUpperCase() })
-const movement = takeInput('input/input-data.txt')[2].split('').map(str => { return str.toUpperCase() })
 
 const leftTurn = (dir) => {
   switch (dir) {
@@ -49,11 +46,21 @@ const navigate = (initialPosition, instructions) => {
   return [x, y, heading]
 }
 
+
+console.log(inputData('input/input-data.txt'))
+
+// sets grid canvas for rovers
+// sets starting position for rovers
+// sets the navigation instructions for rovers
+const grid = inputData('input/input-data.txt')[0].map(str => { return parseInt(str, 10) })
+const startingPosition = inputData('input/input-data.txt')[1].map(str => { return str.toUpperCase() })
+const movement = inputData('input/input-data.txt')[2].map(str => { return str.toUpperCase() })
+
 const roverPosition = navigate(startingPosition, movement)
 
 module.exports = {
-  takeInput: takeInput,
-  gridSize: gridSize,
+  inputData: inputData,
+  grid: grid,
   startingPosition: startingPosition,
   movement: movement,
   leftTurn: leftTurn,
