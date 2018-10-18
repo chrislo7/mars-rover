@@ -36,8 +36,9 @@ describe('gridSize', function() {
   })
 
   it ('should return an array with two numbers', function(){
-    assets.gridSize.map(num => { assert.isNumber(num, 'element is a number')})
+    assets.gridSize.map(num => { assert.isFinite(num, 'element is a finite number')})
   })
+
 })
 
 describe('startingPosition', function() {
@@ -61,9 +62,35 @@ describe('movement', function() {
   })
 })
 
-// describe('leftTurn', function() {
-//   it ('should show correct cardinal directions', function(){
-//     assert.equals(assets.leftTurn('W'), )
-//   })
-// })
+describe('leftTurn', function() {
+  it ('should show correct cardinal directions for left turns', function(){
+    assert.equal(assets.leftTurn('N'), 'W', 'should return W')
+    assert.equal(assets.leftTurn('S'), 'E', 'should return E')
+    assert.equal(assets.leftTurn('W'), 'S', 'should return S')
+    assert.equal(assets.leftTurn('E'), 'N', 'should return N')
+  })
+})
+
+describe('rightTurn', function() {
+  it ('should show correct cardinal directions for right turns', function(){
+    assert.equal(assets.rightTurn('N'), 'E', 'should return E')
+    assert.equal(assets.rightTurn('S'), 'W', 'should return W')
+    assert.equal(assets.rightTurn('W'), 'N', 'should return N')
+    assert.equal(assets.rightTurn('E'), 'S', 'should return S')
+  })
+})
+
+describe('navigate', function() {
+  let result = assets.navigate(assets.startingPosition, assets.movement)
+
+  it ('should return an array with three elements', function(){
+    result.map( elements => { assert.exists(elements, 'element exists') })
+    assert.notExists(result[3], 'a fourth element does not exist')
+  })
+
+  it ('should have numbers for first two elements', function() {
+    assert.isFinite(result[0], 'element is a finite number')
+    assert.isFinite(result[1], 'element is a finite number')
+  })
+})
 
