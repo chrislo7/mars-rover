@@ -1,4 +1,5 @@
 const fs = require('fs')
+const Rover = require('./rover.js')
 
 // read data from txt file, splits input to string and then to an array by each line
 // each line itself is also an array
@@ -46,21 +47,22 @@ const navigate = (initialPosition, instructions) => {
   return [x, y, heading]
 }
 
-// sets grid canvas for rovers
-// sets starting position for rovers
-// // sets the navigation instructions for rovers
-// const grid = inputData('input/input-data.txt')[0].map(str => { return parseInt(str, 10) })
-// const startingPosition = inputData('input/input-data.txt')[1].map(str => { return str.toUpperCase() })
-// const movement = inputData('input/input-data.txt')[2].map(str => { return str.toUpperCase() })
+const createRovers = (input) => {
+  let positionArr = []
+  let rovers = []
 
-//const roverPosition = navigate(startingPosition, movement)
+  input.map(filepath => {
+    positionArr.push( inputData(filepath)[0].map(str => { return str.toUpperCase() }) )
+  })
+
+  positionArr.map(pos => { rovers.push ( new Rover(pos[0], pos[1], pos[2]) ) })
+  return rovers
+}
 
 module.exports = {
   inputData: inputData,
-  // grid: grid,
-  // startingPosition: startingPosition,
-  // movement: movement,
   leftTurn: leftTurn,
   rightTurn: rightTurn,
-  navigate: navigate
+  navigate: navigate,
+  createRovers: createRovers
 }

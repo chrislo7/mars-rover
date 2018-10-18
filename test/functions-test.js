@@ -2,6 +2,7 @@ const chai = require('chai')
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 const assets = require('../functions.js');
+const Rover = require('../rover.js');
 
 
 // helper to check for uppercase
@@ -18,47 +19,47 @@ chai.Assertion.addProperty('uppercase', function() {
 
 describe('inputData', function() {
   it ('should take input from text file', function(){
-    let result = assets.inputData('input/input-data.txt')
+    let result = assets.inputData('input/rover1.txt')
     assert.exists(result)
   })
 
   it ('should return array for each line within txt file', function(){
-    let result = assets.inputData('input/input-data.txt')
+    let result = assets.inputData('input/rover1.txt')
     assert.isArray(result)
   })
 })
 
-describe('grid', function() {
-  it ('should return an array with two elements', function(){
-    assert.exists(assets.grid[0])
-    assert.exists(assets.grid[1])
-    assert.notExists(assets.grid[2])
-  })
+// describe('grid', function() {
+//   it ('should return an array with two elements', function(){
+//     assert.exists(assets.grid[0])
+//     assert.exists(assets.grid[1])
+//     assert.notExists(assets.grid[2])
+//   })
 
-  it ('should return an array with two numbers', function(){
-    assets.grid.map(num => { assert.isFinite(num)})
-  })
+//   it ('should return an array with two numbers', function(){
+//     assets.grid.map(num => { assert.isFinite(num)})
+//   })
 
-})
+// })
 
-describe('startingPosition', function() {
-  it ('should return an array with three elements', function(){
-    assert.exists(assets.startingPosition[0])
-    assert.exists(assets.startingPosition[1])
-    assert.exists(assets.startingPosition[2])
-    assert.notExists(assets.startingPosition[3])
-  })
+// describe('startingPosition', function() {
+//   it ('should return an array with three elements', function(){
+//     assert.exists(assets.startingPosition[0])
+//     assert.exists(assets.startingPosition[1])
+//     assert.exists(assets.startingPosition[2])
+//     assert.notExists(assets.startingPosition[3])
+//   })
 
-  it ('should change third element to uppercase', function(){
-    expect(assets.startingPosition[2]).to.be.uppercase
-  })
-})
+//   it ('should change third element to uppercase', function(){
+//     expect(assets.startingPosition[2]).to.be.uppercase
+//   })
+// })
 
-describe('movement', function() {
-  it ('should change all elements to uppercase', function() {
-    assets.movement.map(str => { expect(str).to.be.uppercase })
-  })
-})
+// describe('movement', function() {
+//   it ('should change all elements to uppercase', function() {
+//     assets.movement.map(str => { expect(str).to.be.uppercase })
+//   })
+// })
 
 describe('leftTurn', function() {
   it ('should show correct cardinal directions for left turns', function(){
@@ -79,7 +80,7 @@ describe('rightTurn', function() {
 })
 
 describe('navigate', function() {
-  let result = assets.navigate(assets.startingPosition, assets.movement)
+  let result = assets.navigate([1,2, 'N'], ['L', 'M', 'L', 'M', 'L', 'M', 'L', 'M', 'M'])
 
   it ('should return an array with three elements', function(){
     result.map( elements => { assert.exists(elements) })
@@ -91,3 +92,30 @@ describe('navigate', function() {
     assert.isFinite(result[1])
   })
 })
+
+describe('createRovers', function() {
+  let result = assets.createRovers(['input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt'])
+  it ('should return array with three Rover instances', function() {
+    assert.isArray(result)
+    assert.instanceOf(result[0], Rover)
+    assert.instanceOf(result[1], Rover)
+    assert.instanceOf(result[2], Rover)
+  })
+
+  it ('should have Rover instances with x & y coordinates and initial headings', function() {
+    assert.equal(result[0].x, 1)
+    assert.equal(result[0].y, 2)
+    assert.equal(result[0].headings, 'N')
+    assert.equal(result[1].x, 3)
+    assert.equal(result[1].y, 3)
+    assert.equal(result[1].headings, 'E')
+    assert.equal(result[2].x, 2)
+    assert.equal(result[2].y, 1)
+    assert.equal(result[2].headings, 'W')
+  })
+})
+
+
+
+
+
