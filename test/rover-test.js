@@ -19,34 +19,34 @@ chai.Assertion.addProperty('uppercase', function() {
 describe('inputData', function() {
   it ('should take input from text file', function(){
     let result = assets.inputData('input/input-data.txt')
-    assert.exists(result, 'input is neither `null` nor `undefined`')
+    assert.exists(result)
   })
 
   it ('should return array for each line within txt file', function(){
     let result = assets.inputData('input/input-data.txt')
-    assert.isArray(result, 'input is an array')
+    assert.isArray(result)
   })
 })
 
 describe('grid', function() {
   it ('should return an array with two elements', function(){
-    assert.exists(assets.grid[0], 'first element exists')
-    assert.exists(assets.grid[1], 'second element exists')
-    assert.notExists(assets.grid[2], 'a third element does not exist')
+    assert.exists(assets.grid[0])
+    assert.exists(assets.grid[1])
+    assert.notExists(assets.grid[2])
   })
 
   it ('should return an array with two numbers', function(){
-    assets.grid.map(num => { assert.isFinite(num, 'element is a finite number')})
+    assets.grid.map(num => { assert.isFinite(num)})
   })
 
 })
 
 describe('startingPosition', function() {
   it ('should return an array with three elements', function(){
-    assert.exists(assets.startingPosition[0], 'first element exists')
-    assert.exists(assets.startingPosition[1], 'second element exists')
-    assert.exists(assets.startingPosition[2], 'third element exists')
-    assert.notExists(assets.startingPosition[3], 'a fourth element does not exist')
+    assert.exists(assets.startingPosition[0])
+    assert.exists(assets.startingPosition[1])
+    assert.exists(assets.startingPosition[2])
+    assert.notExists(assets.startingPosition[3])
   })
 
   it ('should change third element to uppercase', function(){
@@ -56,27 +56,25 @@ describe('startingPosition', function() {
 
 describe('movement', function() {
   it ('should change all elements to uppercase', function() {
-    assets.movement.map(str => {
-      expect(str).to.be.uppercase
-    })
+    assets.movement.map(str => { expect(str).to.be.uppercase })
   })
 })
 
 describe('leftTurn', function() {
   it ('should show correct cardinal directions for left turns', function(){
-    assert.equal(assets.leftTurn('N'), 'W', 'returns W')
-    assert.equal(assets.leftTurn('S'), 'E', 'returns E')
-    assert.equal(assets.leftTurn('W'), 'S', 'returns S')
-    assert.equal(assets.leftTurn('E'), 'N', 'returns N')
+    assert.equal(assets.leftTurn('N'), 'W')
+    assert.equal(assets.leftTurn('S'), 'E')
+    assert.equal(assets.leftTurn('W'), 'S')
+    assert.equal(assets.leftTurn('E'), 'N')
   })
 })
 
 describe('rightTurn', function() {
   it ('should show correct cardinal directions for right turns', function(){
-    assert.equal(assets.rightTurn('N'), 'E', 'returns E')
-    assert.equal(assets.rightTurn('S'), 'W', 'returns W')
-    assert.equal(assets.rightTurn('W'), 'N', 'returns N')
-    assert.equal(assets.rightTurn('E'), 'S', 'returns S')
+    assert.equal(assets.rightTurn('N'), 'E')
+    assert.equal(assets.rightTurn('S'), 'W')
+    assert.equal(assets.rightTurn('W'), 'N')
+    assert.equal(assets.rightTurn('E'), 'S')
   })
 })
 
@@ -84,12 +82,12 @@ describe('navigate', function() {
   let result = assets.navigate(assets.startingPosition, assets.movement)
 
   it ('should return an array with three elements', function(){
-    result.map( elements => { assert.exists(elements, 'element exists') })
-    assert.notExists(result[3], 'a fourth element does not exist')
+    result.map( elements => { assert.exists(elements) })
+    assert.notExists(result[3])
   })
 
   it ('should have numbers for first two elements', function() {
-    assert.isFinite(result[0], 'element is a finite number')
-    assert.isFinite(result[1], 'element is a finite number')
+    assert.isFinite(result[0])
+    assert.isFinite(result[1])
   })
 })

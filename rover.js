@@ -46,9 +46,6 @@ const navigate = (initialPosition, instructions) => {
   return [x, y, heading]
 }
 
-
-console.log(inputData('input/input-data.txt'))
-
 // sets grid canvas for rovers
 // sets starting position for rovers
 // sets the navigation instructions for rovers

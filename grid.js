@@ -1,11 +1,9 @@
 class Grid {
-  constructor (x, y) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.rovers = [];
   }
 }
 
-module.exports = {
-  Grid: Grid
-}
+module.exports = Grid;
