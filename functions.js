@@ -48,18 +48,18 @@ const navigate = (initialPosition, instructions) => {
 
 // sets grid canvas for rovers
 // sets starting position for rovers
-// sets the navigation instructions for rovers
-const grid = inputData('input/input-data.txt')[0].map(str => { return parseInt(str, 10) })
-const startingPosition = inputData('input/input-data.txt')[1].map(str => { return str.toUpperCase() })
-const movement = inputData('input/input-data.txt')[2].map(str => { return str.toUpperCase() })
+// // sets the navigation instructions for rovers
+// const grid = inputData('input/input-data.txt')[0].map(str => { return parseInt(str, 10) })
+// const startingPosition = inputData('input/input-data.txt')[1].map(str => { return str.toUpperCase() })
+// const movement = inputData('input/input-data.txt')[2].map(str => { return str.toUpperCase() })
 
-const roverPosition = navigate(startingPosition, movement)
+//const roverPosition = navigate(startingPosition, movement)
 
 module.exports = {
   inputData: inputData,
-  grid: grid,
-  startingPosition: startingPosition,
-  movement: movement,
+  // grid: grid,
+  // startingPosition: startingPosition,
+  // movement: movement,
   leftTurn: leftTurn,
   rightTurn: rightTurn,
   navigate: navigate
