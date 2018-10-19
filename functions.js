@@ -81,7 +81,9 @@ const updateLocations = (rovers, grid) => {
 
     for (let originalRovers of rovers) {
       if (updatedRover.x === originalRovers.x && updatedRover.y === originalRovers.y) {
-        console.log('A rover is already here, moving rover back')
+        updatedRover.x = updatedRover.x - 1
+        updatedRover.y = updatedRover.y - 1
+        console.log('A rover is already here, moving current rover to approx. location')
       }
     }
 

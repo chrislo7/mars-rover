@@ -97,7 +97,6 @@ describe('navigate', function() {
 
 let testGrid = new Grid(5, 5)
 let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
-
 describe('createRovers', function() {
   it ('should return array with three Rover instances', function() {
     assert.isArray(testRovers)
