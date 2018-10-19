@@ -15,7 +15,9 @@ class Grid {
   }
 
   placeRover(rover) {
-    if (this.checkValidity(rover)) { this.rovers.push(rover) }
+    if (this.checkValidity(rover)) {
+      this.rovers.push(rover)
+    }
   }
 }
 

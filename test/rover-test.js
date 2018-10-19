@@ -11,7 +11,7 @@ describe('Rover Class', function() {
     assert.exists(Rover)
   })
 
-  it('should have x, y coordinates and heading', function() {
+  it('should have x, y coordinates, headings and navigation instructions', function() {
     assert.equal(testRover1.x, 1)
     assert.equal(testRover1.y, 2)
     assert.equal(testRover1.headings, 'W')

@@ -1,8 +1,9 @@
 class Rover {
-  constructor(x, y, headings) {
+  constructor(x, y, headings, navigation) {
     this.x = x;
     this.y = y;
     this.headings = headings;
+    this.navigation = navigation;
   }
 }
 

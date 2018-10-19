@@ -3,6 +3,7 @@ const assert = require('chai').assert;
 const expect = require('chai').expect;
 const assets = require('../functions.js');
 const Rover = require('../rover.js');
+const Grid = require('../grid.js');
 
 
 // helper to check for uppercase
@@ -93,29 +94,44 @@ describe('navigate', function() {
   })
 })
 
+
+let testGrid = new Grid(5, 5)
+let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
+
 describe('createRovers', function() {
-  let result = assets.createRovers(['input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt'])
   it ('should return array with three Rover instances', function() {
-    assert.isArray(result)
-    assert.instanceOf(result[0], Rover)
-    assert.instanceOf(result[1], Rover)
-    assert.instanceOf(result[2], Rover)
+    assert.isArray(testRovers)
+    assert.instanceOf(testRovers[0], Rover)
+    assert.instanceOf(testRovers[1], Rover)
+    assert.instanceOf(testRovers[2], Rover)
   })
 
   it ('should have Rover instances with x & y coordinates and initial headings', function() {
-    assert.equal(result[0].x, 1)
-    assert.equal(result[0].y, 2)
-    assert.equal(result[0].headings, 'N')
-    assert.equal(result[1].x, 3)
-    assert.equal(result[1].y, 3)
-    assert.equal(result[1].headings, 'E')
-    assert.equal(result[2].x, 2)
-    assert.equal(result[2].y, 1)
-    assert.equal(result[2].headings, 'W')
+    assert.equal(testRovers[0].x, 1)
+    assert.equal(testRovers[0].y, 2)
+    assert.equal(testRovers[0].headings, 'N')
+    assert.deepEqual(testRovers[0].navigation, [ 'L', 'M', 'L', 'M', 'L', 'M', 'L', 'M', 'M' ])
+    assert.equal(testRovers[1].x, 3)
+    assert.equal(testRovers[1].y, 3)
+    assert.equal(testRovers[1].headings, 'E')
+    assert.deepEqual(testRovers[1].navigation, [ 'M', 'M', 'R', 'M', 'M', 'R', 'M', 'R', 'R', 'M' ])
+    assert.equal(testRovers[2].x, 2)
+    assert.equal(testRovers[2].y, 1)
+    assert.equal(testRovers[2].headings, 'W')
+    assert.deepEqual(testRovers[2].navigation, [ 'L', 'M', 'L', 'M', 'M', 'L', 'M', 'L', 'M' ])
   })
 })
 
-
-
+describe('placeRovers', function() {
+  it ('should place Rovers on Grid', function() {
+    testRovers.map(rover => {
+      testGrid.placeRover(rover)
+    })
+    assert.isArray(testGrid.rovers)
+    assert.equal(testGrid.rovers[0], testRovers[0])
+    assert.equal(testGrid.rovers[1], testRovers[1])
+    assert.equal(testGrid.rovers[2], testRovers[2])
+  })
+})
 
 
