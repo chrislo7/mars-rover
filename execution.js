@@ -9,7 +9,6 @@ let inputs = process.argv.slice(2)
 let grid = fn.inputData(inputs[0])[0].map(str => { return parseInt(str, 10) })
 // Slices inputs to remove grid settings line
 inputs = inputs.slice(1)
-console.log(inputs)
 
 let Mars = new Grid(grid[0], grid[1])
 let Rovers = fn.createRovers(inputs)
@@ -17,13 +16,9 @@ Rovers.map(rover => {
   Mars.placeRover(rover)
 })
 
+fn.updateLocations(Mars.rovers, Mars)
 
 console.log(Mars.rovers)
-
-Mars.rovers.map(rover => {
-  console.log(fn.navigate([rover.x, rover.y, rover.headings], rover.navigation))
-})
-
 
 
 // const startingPosition = inputsData('inputs/inputs-data.txt')[1].map(str => { return str.toUpperCase() })

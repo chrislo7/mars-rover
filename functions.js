@@ -72,11 +72,31 @@ const placeRovers = (input) => {
   input.map(rover => Grid.placeRovers(rover))
 }
 
+const updateLocations = (rovers, grid) => {
+  let amount = rovers.length
+  rovers.map(rover => {
+    let originalCoordinates = [rover.x, rover.y, rover.headings]
+    let newLocation = navigate([rover.x, rover.y, rover.headings], rover.navigation)
+    let updatedRover = new Rover(newLocation[0], newLocation[1], newLocation[2], [])
+
+    for (let originalRovers of rovers) {
+      if (updatedRover.x === originalRovers.x && updatedRover.y === originalRovers.y) {
+        console.log('A rover is already here, moving rover back')
+      }
+    }
+
+    grid.placeRover(updatedRover)
+  })
+
+  grid.rovers = grid.rovers.slice(amount)
+}
+
 module.exports = {
   inputData: inputData,
   leftTurn: leftTurn,
   rightTurn: rightTurn,
   navigate: navigate,
   createRovers: createRovers,
-  placeRovers: placeRovers
+  placeRovers: placeRovers,
+  updateLocations: updateLocations
 }

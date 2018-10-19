@@ -5,6 +5,11 @@ class Rover {
     this.headings = headings;
     this.navigation = navigation;
   }
+
+  updateLocation(input) {
+    this.x = input[0];
+    this.y = input[1];
+  }
 }
 
 module.exports = Rover
