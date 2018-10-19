@@ -19,7 +19,7 @@ Rovers.map(rover => {
 fn.updateLocations(Mars.rovers, Mars)
 
 console.log(Mars.rovers)
-
+fn.createFile(Mars.rovers, './output/')
 
 // const startingPosition = inputsData('inputs/inputs-data.txt')[1].map(str => { return str.toUpperCase() })
 // const movement = inputsData('inputs/inputs-data.txt')[2].map(str => { return str.toUpperCase() })

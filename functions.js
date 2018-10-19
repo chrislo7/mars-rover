@@ -93,6 +93,18 @@ const updateLocations = (rovers, grid) => {
   grid.rovers = grid.rovers.slice(amount)
 }
 
+const createFile = (inputs, filepath) => {
+  inputs.map((input, index) => {
+    fs.writeFile(`${filepath}rover${index + 1}.txt`,
+      `Rover ${index} at x: ${input.x} y: ${input.y} heading: ${input.headings}`,
+      function(err) {
+        if (err) throw err;
+      }
+    )
+  })
+  console.log('Data has been written successfully')
+}
+
 module.exports = {
   inputData: inputData,
   leftTurn: leftTurn,
@@ -100,5 +112,6 @@ module.exports = {
   navigate: navigate,
   createRovers: createRovers,
   placeRovers: placeRovers,
-  updateLocations: updateLocations
+  updateLocations: updateLocations,
+  createFile: createFile
 }
