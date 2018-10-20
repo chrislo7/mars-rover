@@ -49,6 +49,11 @@ This is due to a possibility in a real-world scenario, a file containing a rover
 Similarily, the code outputs to its individual files under the ```output/rover(number).txt``` for the same reason. If necessary, it will be able to output other information in the future.
 
 
+## Future Ideas
+
+- Create a React page to render information visually
+- In the same page, allow users to type or upload rover information
+
 ## Dependencies
 
 - Mocha
