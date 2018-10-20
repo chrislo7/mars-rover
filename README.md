@@ -1,4 +1,6 @@
-# mars-rover
+# Mars-Rover
+
+Coding Challenge
 
 ## The Problem
 
