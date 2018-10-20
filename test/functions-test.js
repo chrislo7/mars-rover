@@ -95,14 +95,14 @@ describe('navigate', function() {
 })
 
 
-let testGrid = new Grid(5, 5)
-let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
+
+
 describe('createRovers', function() {
+  let testGrid = new Grid(5, 5)
+  let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
   it ('should return array with three Rover instances', function() {
     assert.isArray(testRovers)
-    assert.instanceOf(testRovers[0], Rover)
-    assert.instanceOf(testRovers[1], Rover)
-    assert.instanceOf(testRovers[2], Rover)
+    testRovers.map(rover => { assert.instanceOf(rover, Rover) })
   })
 
   it ('should have Rover instances with x & y coordinates and initial headings', function() {
@@ -122,6 +122,9 @@ describe('createRovers', function() {
 })
 
 describe('placeRovers', function() {
+  let testGrid = new Grid(5, 5)
+  let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
+
   it ('should place Rovers on Grid', function() {
     testRovers.map(rover => {
       testGrid.placeRover(rover)
@@ -133,4 +136,18 @@ describe('placeRovers', function() {
   })
 })
 
-
+describe('updateLocations', function(){
+  let testGrid = new Grid(5, 5)
+  let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
+  testGrid.placeRover(testRovers[0])
+  assets.updateLocations(testGrid.rovers, testGrid)
+  it ('should move Rovers to new locations, return new x & y coordinates, headings and empty navigation', function(){
+    testGrid.rovers.map(rover => {
+      assert.instanceOf(rover, Rover)
+      assert.equal(rover.x, '1')
+      assert.equal(rover.y, '3')
+      assert.equal(rover.headings, 'N')
+      assert.deepEqual(rover.navigation, [])
+    })
+  })
+})
