@@ -73,36 +73,31 @@ const placeRovers = (input) => {
 }
 
 const updateLocations = (rovers, grid) => {
-  let amount = rovers.length
+  let amount = rovers.length;
   rovers.map(rover => {
-    let originalCoordinates = [rover.x, rover.y, rover.headings]
     let newLocation = navigate([rover.x, rover.y, rover.headings], rover.navigation)
     let updatedRover = new Rover(newLocation[0], newLocation[1], newLocation[2], [])
 
     for (let originalRovers of rovers) {
       if (updatedRover.x === originalRovers.x && updatedRover.y === originalRovers.y) {
-        updatedRover.x = updatedRover.x - 1
-        updatedRover.y = updatedRover.y - 1
-        console.log('A rover is already here, moving current rover to approx. location')
+        updatedRover.x = updatedRover.x - 1;
+        updatedRover.y = updatedRover.y - 1;
+        console.log('A rover is already here, moving current rover to approx. location');
       }
     }
-
     grid.placeRover(updatedRover)
   })
-
   grid.rovers = grid.rovers.slice(amount)
 }
 
-const createFile = (inputs, filepath) => {
+const createFile = (inputs) => {
   inputs.map((input, index) => {
-    fs.writeFile(`${filepath}rover${index + 1}.txt`,
-      `Rover ${index} at x: ${input.x} y: ${input.y} heading: ${input.headings}`,
-      function(err) {
-        if (err) throw err;
-      }
+    fs.writeFile(`./output/rover${index + 1}.txt`,
+      `Rover ${index + 1} at x: ${input.x} y: ${input.y} heading: ${input.headings}`,
+      function(err) { if (err) throw err; }
     )
   })
-  console.log('Data has been written successfully')
+  console.log('Data has been written to output directory successfully')
 }
 
 module.exports = {

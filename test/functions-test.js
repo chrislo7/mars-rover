@@ -1,9 +1,11 @@
 const chai = require('chai')
+const fs = require('fs')
 const assert = require('chai').assert;
 const expect = require('chai').expect;
 const assets = require('../functions.js');
 const Rover = require('../rover.js');
 const Grid = require('../grid.js');
+
 
 
 // helper to check for uppercase
@@ -29,38 +31,6 @@ describe('inputData', function() {
     assert.isArray(result)
   })
 })
-
-// describe('grid', function() {
-//   it ('should return an array with two elements', function(){
-//     assert.exists(assets.grid[0])
-//     assert.exists(assets.grid[1])
-//     assert.notExists(assets.grid[2])
-//   })
-
-//   it ('should return an array with two numbers', function(){
-//     assets.grid.map(num => { assert.isFinite(num)})
-//   })
-
-// })
-
-// describe('startingPosition', function() {
-//   it ('should return an array with three elements', function(){
-//     assert.exists(assets.startingPosition[0])
-//     assert.exists(assets.startingPosition[1])
-//     assert.exists(assets.startingPosition[2])
-//     assert.notExists(assets.startingPosition[3])
-//   })
-
-//   it ('should change third element to uppercase', function(){
-//     expect(assets.startingPosition[2]).to.be.uppercase
-//   })
-// })
-
-// describe('movement', function() {
-//   it ('should change all elements to uppercase', function() {
-//     assets.movement.map(str => { expect(str).to.be.uppercase })
-//   })
-// })
 
 describe('leftTurn', function() {
   it ('should show correct cardinal directions for left turns', function(){
@@ -105,7 +75,7 @@ describe('createRovers', function() {
     testRovers.map(rover => { assert.instanceOf(rover, Rover) })
   })
 
-  it ('should have Rover instances with x & y coordinates and initial headings', function() {
+  it ('should have Rover instances with x, y coordinates and initial headings', function() {
     assert.equal(testRovers[0].x, 1)
     assert.equal(testRovers[0].y, 2)
     assert.equal(testRovers[0].headings, 'N')
@@ -141,13 +111,31 @@ describe('updateLocations', function(){
   let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
   testGrid.placeRover(testRovers[0])
   assets.updateLocations(testGrid.rovers, testGrid)
+
+  it ('should still be an instance of Rover', function(){
+    testGrid.rovers.map(rover => { assert.instanceOf(rover, Rover) })
+  })
+
   it ('should move Rovers to new locations, return new x & y coordinates, headings and empty navigation', function(){
     testGrid.rovers.map(rover => {
-      assert.instanceOf(rover, Rover)
       assert.equal(rover.x, '1')
       assert.equal(rover.y, '3')
       assert.equal(rover.headings, 'N')
       assert.deepEqual(rover.navigation, [])
     })
   })
+})
+
+
+describe('createFile', function() {
+  let testGrid = new Grid(5, 5)
+  let testRovers = assets.createRovers([ 'input/rover1.txt', 'input/rover2.txt', 'input/rover3.txt' ])
+  testGrid.placeRover(testRovers[0])
+  assets.updateLocations(testGrid.rovers, testGrid)
+  assets.createFile(testGrid.rovers)
+
+  it('should return true if file exists', function(){
+    assert.isTrue(fs.existsSync("./output/rover1.txt"));
+  })
+
 })
